@@ -1,4 +1,4 @@
-#Basic SEIR Model: Uses code from https://towardsdatascience.com/social-distancing-to-slow-the-coronavirus-768292f04296
+# Basic SEIR Model: Uses code from https://towardsdatascience.com/social-distancing-to-slow-the-coronavirus-768292f04296
 import numpy as np
 import matplotlib.pyplot as plt
 

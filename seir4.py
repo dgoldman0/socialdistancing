@@ -1,4 +1,4 @@
-#Scan through various social distancing values and plot the relative mortality rates
+# Scan through various social distancing values and plot the relative mortality rates
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -22,10 +22,10 @@ def model(init_vals, params, t):
     SY_0, SO_0, EY_0, EO_0, IY_0, IO_0, RY_0, RO_0, MY_0, MO_0 = init_vals
     SY, EY, IY, RY, MY = [SY_0], [EY_0], [IY_0], [RY_0], [MY_0]
     SO, EO, IO, RO, MO = [SO_0], [EO_0], [IO_0], [RO_0], [MO_0]
-    alpha, beta1, beta2, beta3, gamma, mo1, mo2, rho1, rho2, rho3, t_stop = params
+    alpha, beta1, beta2, beta3, gamma, mo1, mo2, rho1, rho2, rho3, t_start, t_stop = params
     dt = t[1] - t[0]
     for k in t[1:]:
-        if k < t_stop:
+        if k > t_start and k < t_stop:
             _rho1 = rho1
             _rho2 = rho2
             _rho3 = rho3
@@ -59,8 +59,9 @@ def model(init_vals, params, t):
 deaths = []
 values = []
 for rho1 in range(10, 41):
-    t_stop = 50
-    params = alpha, beta1, beta2, beta3, gamma, mo1, mo2, rho1/20, rho2, rho3, t_stop
+    t_start = 57
+    t_stop = 57+56
+    params = alpha, beta1, beta2, beta3, gamma, mo1, mo2, rho1/20, rho2, rho3, t_start, t_stop
     deaths.append(model(init_vals, params, t)[1])
     values.append(1/(rho1/20))
 deaths = deaths / max(deaths)
