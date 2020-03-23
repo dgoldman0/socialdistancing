@@ -15,4 +15,4 @@ While a degree of social distancing seems to be effective at flattening the curv
 The most effective option seems to be to increase social distancing for at risk, and between low and high risk populations. A reduction in contact rate of more than 50% for the low risk population does not seem reasonable, based on the model evaluation.
 
 ## Additional Info
-More information can be found at [The Potential Success and Failures of Social Distancing](https://medium.com/politicoid/the-potential-success-and-failures-of-social-distancing-b04c19bfd234?source=friends_link&sk=5332fe1e650b0424b59af14288b81881)
+More information can be found at [The Potential Success and Failures of Social Distancing](https://vocal.media/longevity/the-potential-success-and-failures-of-social-distancing)
