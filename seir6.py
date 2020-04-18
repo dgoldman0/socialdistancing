@@ -1,32 +1,45 @@
-# Scan through various social distancing values and plot the relative mortality rates
+# This model predicts the effect of voluntary social distancing based on a reported infection metric.
 
 import numpy as np
 import matplotlib.pyplot as plt
 
 # Define parameters
-t_max = 1000
+t_max = 250
 dt = .05
 t = np.linspace(0, t_max, int(t_max/dt) + 1)
 N = 20000
-init_vals = 0.84 - 0.84/N, 0.16 - 0.16/N, 0.84/N, 0.16/N, 0, 0, 0, 0, 0, 0
+init_vals = 0.84 - 0.5/N, 0.16 - 0.5/N, 0.5/N, 0.5/N, 0, 0, 0, 0, 0, 0
 alpha = 0.2
 beta1 = 1.75
-beta2 = 1       #Assumes a smaller contact rate between young and old people than between people in the same age group
+beta2 = 1
 beta3 = 1.75
 gamma = 0.5
-rho2 = 0.5      # Contact rate between young and old people
-rho3 = 0.5      # Contact rate between old people
-mo1 = 0.001     # Mortality rate is very low for young people
-mo2 = 0.1       # And the mortality rate is quite high for older people
+rho1 = 0.4  # Contact rate between young people
+rho2 = 0.25 # Contact rate between young and old people
+rho3 = 0.25 # Contact rate between old people
+mo1 = 0.001
+mo2 = 0.1
+zeta = 0.01
+params = alpha, beta1, beta2, beta3, gamma, mo1, mo2, rho1, rho2, rho3, zeta
 
 def model(init_vals, params, t):
     SY_0, SO_0, EY_0, EO_0, IY_0, IO_0, RY_0, RO_0, MY_0, MO_0 = init_vals
     SY, EY, IY, RY, MY = [SY_0], [EY_0], [IY_0], [RY_0], [MY_0]
     SO, EO, IO, RO, MO = [SO_0], [EO_0], [IO_0], [RO_0], [MO_0]
-    alpha, beta1, beta2, beta3, gamma, mo1, mo2, rho1, rho2, rho3, t_start, t_stop = params
+    RA = [0]
+    alpha, beta1, beta2, beta3, gamma, mo1, mo2, rho1, rho2, rho3, zeta = params
     dt = t[1] - t[0]
+    dist = False
+    changes = 0
     for k in t[1:]:
-        if k > t_start and k < t_stop:
+        # Check if the approximate infection load averaged over the past 7 days is greater than the threshold
+        r_avg = (np.mean(IY[-14:]) + np.mean(IO[-14:])) / 2
+        RA.append(r_avg)
+        last_dist = dist
+        dist = (r_avg > zeta)
+        if dist and not last_dist:
+            changes += 1
+        if dist:
             _rho1 = rho1
             _rho2 = rho2
             _rho3 = rho3
@@ -54,22 +67,17 @@ def model(init_vals, params, t):
         RO.append(next_RO)
         MY.append(next_MY)
         MO.append(next_MO)
-    return MO+MY, next_MO+next_MY
+    mx = max(IY)
+    print(mx)
+    print(IY.index(mx) * 0.05)
+    print(changes)
+    return [np.stack([np.add(SY, SO), np.add(EY, EO), np.add(IY, IO), np.add(RY, RO), np.add(MY, MO), RA]).T, changes]
 
 # Run simulation
-deaths = []
-values = []
-for rho1 in range(10, 41):
-    t_start = 57
-    t_stop = 57+56
-    params = alpha, beta1, beta2, beta3, gamma, mo1, mo2, rho1/20, rho2, rho3, t_start, t_stop
-    deaths.append(model(init_vals, params, t)[1])
-    values.append(1/(rho1/20))
-deaths = deaths / max(deaths)
+results = model(init_vals, params, t)
 # Plot results
 plt.figure(figsize=(12,8))
-plt.scatter(values, deaths)
-plt.xlabel('1 / ρ')
-plt.ylabel('Mortality Rate Relative to Max')
-plt.title('Impact of Social Distancing on Mortality')
+plt.plot(results[0])
+plt.legend(['Susceptible', 'Exposed', 'Infected', 'Recovered', 'Dead', 'Rolling AVG'])
+plt.xlabel('Time Steps')
 plt.show()

@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # Define parameters
-t_max = 1000
+t_max = 250
 dt = .05
 t = np.linspace(0, t_max, int(t_max/dt) + 1)
 N = 20000
@@ -14,9 +14,9 @@ beta1 = 1.75
 beta2 = 1
 beta3 = 1.75
 gamma = 0.5
-rho1 = 0.4  # Contact rate between young people
-rho2 = 0.25 # Contact rate between young and old people
-rho3 = 0.25 # Contact rate between old people
+rho1 = 0.5  # Contact rate between young people
+rho2 = 0.5 # Contact rate between young and old people
+rho3 = 0.5 # Contact rate between old people
 mo1 = 0.001
 mo2 = 0.1
 params = alpha, beta1, beta2, beta3, gamma, mo1, mo2, rho1, rho2, rho3
@@ -56,8 +56,9 @@ def model(init_vals, params, t):
         RO.append(next_RO)
         MY.append(next_MY)
         MO.append(next_MO)
-    print(MY[-1])
-    print(MO[-1])
+    mx = max(IY)
+    print(mx)
+    print(IY.index(mx) * 0.05)
     return np.stack([SY, SO, EY, EO, IY, IO, RY, RO, MY, MO]).T
 
 # Run simulation

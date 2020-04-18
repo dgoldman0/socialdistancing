@@ -1,21 +1,30 @@
 # An Epidemic Model Analyzing Social Distancing
 
-Social distancing is being attempted to limit the impact of the coronavirus, but little has been done to ensure that social distancing of this kind will be safe and effective.
+Social distancing is being attempted to limit the impact of the coronavirus, but little has been done to ensure that social distancing of this kind will be safe and effective. This repository is a work in progress. Right now, the objective is to continue research into the efficacy and impact of social distancing, and other related topics. This repository will be updated frequently as more analysis is performed. I plan on releasing a final version of this project at some point. If I can improve my skills a little, or find someone to help, I would like to turn the project into a Jupyter notebook and publish it as a webpage, so that people can interact with the models themselves. 
 
 ## Models
+
+### Basic Alterations to the SEIR Model
+
 - [Basic SEIR model](https://github.com/dgoldman0/socialdistancing/blob/master/seir.py)
 - [Inclusion of low and high risk categories](https://github.com/dgoldman0/socialdistancing/blob/master/seir2.py)
 - [Analysis of curves varying the level of social distancing of low risk group](https://github.com/dgoldman0/socialdistancing/blob/master/seir3.py)
 - [Analysis of relative mortality rates at varying levels of social distancing](https://github.com/dgoldman0/socialdistancing/blob/master/seir4.py)
 - [Final analysis incorporating healthcare resource overload and specific estimated parameters](https://github.com/dgoldman0/socialdistancing/blob/master/seir5.py)
 
+### Further Model Research
+
+While seir5.py is considered a final model and should be fully functional for analysis, more work can be done. Included in more recent drafts of this project is a [modulated distancing model](https://github.com/dgoldman0/socialdistancing/blob/master/seir5.py), which uses voluntary social distancing resulting from a rolling average reporting system. More information on this model can be found in its own [dedicated README file](https://github.com/dgoldman0/socialdistancing/blob/master/rolling.md).
+
+Aside from these basic alterations to the SEIR model, the multi_sir folder will store ideas relating to simplifications of complex compartmental models and hybrids between compartmental and graph based models.
+
 ## Data Sources and Estimates
 
-## Hospital Bed Capacity
+### Hospital Bed Capacity
 
 Hospital bed capacity is estimated based on figures from [COVIDACTNOW](https://covidactnow.org/). The model assumes that there are roughly enough hospital beds for 0.22% of the population, with 60% capacity, and an emergency capacity build of roughly 200%. As a conservative estimate, I chose 0.1% for my capacity limit.
 
-## Case Fatality Rate
+### Case Fatality Rate
 
 The case fatality rate estimates are all over the board, and seem to vary based on the quality of the health care system, the age of the patient, and so on. Mortality seems to be orders of magnitude higher in at risk populations compared to low risk populations. COVIDACTNOW estimates a case fatality rate of 1.1% with an additional 1% if hospitals are overburdened.
 
@@ -23,7 +32,7 @@ More data is coming in all the time, and I will be able to update my models acco
 
 Assuming that being over-capacity increases the risk of death among the low risk population by 50% and the high risk by 200%, that would yield a case fatality rate of 0.15% and 30% respectively.
 
-## Estimate of Social Distancing Timing
+### Estimate of Social Distancing Timing
 
 The first case of SARS-CoV-2, within the United States was identified on January 7th, 2020 ([Holshue et al. 2020](https://www.nejm.org/doi/full/10.1056/NEJMoa2001191)). Lockdown orders began going into effect roughly 60 days later. This is used as the estimated start time. A more complex model might include a rolling social distancing process, where the degree of social distancing increases over time. The fifth and final model estimates an approximate lockdown period of 90 days.
 
