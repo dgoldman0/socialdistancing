@@ -16,9 +16,13 @@ And so, this model assumes that a distancing of 60% for the low risk population,
 
 ## Results
 
-There was an initial ramping up of the infection as the rolling average moved towards the 1% rate. Once it reached that rate, social distancing was engaged six times during the outbreak period. Adjusting seir2.py to the distancing values used in seir6.py, a peak infection rate within the low risk population was roughly 7.6% and occurred on day 91, showing a post-relaxation spike (relaxation occurred on day 50). However, for the cyclical model, the maximum infection rate occurred a little after day 40, and the maximum infection rate within the low risk population was only 2.4%, which indicates that a prolonged cyclical distancing effort can be far more effective than a short term continuous distancing effort of the same severity. Below is a graphical result showing total population statistics for susceptible, exposed, infected, recovered, and dead, as well as the rolling average. 
+There was an initial ramping up of the infection as the rolling average moved towards the 1% rate. Once it reached that rate, social distancing was engaged six times during the outbreak period. Adjusting seir2.py to the distancing values used in seir6.py, a peak infection rate within the low risk population was roughly 7.6% and occurred on day 91, showing a post-relaxation spike (relaxation occurred on day 50). However, for the cyclical model, the maximum infection rate occurred a little after day 40, and the maximum infection rate within the low risk population was only 2.4%, which indicates that a prolonged cyclical distancing effort can be far more effective than a short term continuous distancing effort of the same severity. Below is a graphical result showing total population statistics for susceptible, exposed, infected, recovered, and dead, as well as the rolling average.
 
 ![Graphical Analysis: Cyclical Distancing](/Figure_3.png "Cyclical Distancing")
+
+### Overconfidence Adjustment
+
+One potential drawback of this system is that a low risk report could result in riskier behavior increasing the social contact rate above the norm. In order to take this risk factor into account, a minor alteration was made to seir6. After the first 15 days, whenever the moving average was below threshold, the contact rate within the low risk population was increased to 25% above the base contact rate. This adjustment resulted in one extra cycle and a max infection rate of 2.7% occurring on roughly day 37. This model also suggests a roughly 20% reduction in mortality rate, relative to non-cyclical lockdown of equivalent scale, lasting for 50 days. 
 
 # The New Normal
 

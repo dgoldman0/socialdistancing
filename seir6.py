@@ -44,7 +44,10 @@ def model(init_vals, params, t):
             _rho2 = rho2
             _rho3 = rho3
         else:
-            _rho1 = 1
+            if k > 15:
+                _rho1 = 1.25
+            else:
+                _rho1 = 1
             _rho2 = 1
             _rho3 = 1
         next_SY = SY[-1] - (_rho1*beta1*SY[-1]*IY[-1] + _rho2*beta2*SY[-1]*IO[-1])*dt
@@ -70,6 +73,7 @@ def model(init_vals, params, t):
     mx = max(IY)
     print(mx)
     print(IY.index(mx) * 0.05)
+    print(MY[-1] + MO[-1])
     print(changes)
     return [np.stack([np.add(SY, SO), np.add(EY, EO), np.add(IY, IO), np.add(RY, RO), np.add(MY, MO), RA]).T, changes]
 
