@@ -1,6 +1,6 @@
 # An Epidemic Model Analyzing Social Distancing
 
-Social distancing is being attempted to limit the impact of the coronavirus, but little has been done to ensure that social distancing of this kind will be safe and effective. This repository is a work in progress. Right now, the objective is to continue research into the efficacy and impact of social distancing, and other related topics. This repository will be updated frequently as more analysis is performed. I plan on releasing a final version of this project at some point. If I can improve my skills a little, or find someone to help, I would like to turn the project into a Jupyter notebook and publish it as a webpage, so that people can interact with the models themselves. 
+Social distancing is being attempted to limit the impact of the coronavirus, but little has been done to ensure that social distancing of this kind will be safe and effective. This repository is a work in progress. Right now, the objective is to continue research into the efficacy and impact of social distancing, and other related topics. This repository will be updated frequently as more analysis is performed. I plan on releasing a final version of this project at some point. If I can improve my skills a little, or find someone to help, I would like to turn the project into a Jupyter notebook and publish it as a webpage, so that people can interact with the models themselves.
 
 ## Models
 
@@ -14,7 +14,7 @@ Social distancing is being attempted to limit the impact of the coronavirus, but
 
 ### Further Model Research
 
-While seir5.py is considered a final model and should be fully functional for analysis, more work can be done. Included in more recent drafts of this project is a [modulated distancing model](https://github.com/dgoldman0/socialdistancing/blob/master/seir5.py), which uses voluntary social distancing resulting from a rolling average reporting system. More information on this model can be found in its own [dedicated README file](https://github.com/dgoldman0/socialdistancing/blob/master/rolling.md).
+While seir5.py is considered a final model and should be fully functional for analysis, more work can be done. Included in more recent drafts of this project is a [modulated distancing model](https://github.com/dgoldman0/socialdistancing/blob/master/seir6.py), which uses voluntary social distancing resulting from a rolling average reporting system. More information on this model can be found in its own [dedicated README file](https://github.com/dgoldman0/socialdistancing/blob/master/rolling.md).
 
 Aside from these basic alterations to the SEIR model, the multi_sir folder will store ideas relating to simplifications of complex compartmental models and hybrids between compartmental and graph based models.
 
